@@ -1,20 +1,31 @@
-import { animated, useSpring } from 'react-spring'
+// import { animated, useSpring } from 'react-spring'
 
 export const Circle = (props) => {
-  const springProps = useSpring(props)
+  // const springProps = useSpring(props)
 
-  return <animated.circle {...springProps} />
+  // return <animated.circle {...springProps} />
+
+  return <circle {...props} />
 }
 
 export const Connector = (props) => {
-  const springProps = useSpring(props)
+  // const springProps = useSpring(props)
+
+  // return (
+  //   <animated.polyline
+  //     fill='none'
+  //     stroke='black'
+  //     strokeWidth={5}
+  //     {...springProps}
+  //   />
+  // )
 
   return (
-    <animated.polyline
+    <polyline
       fill='none'
       stroke='black'
       strokeWidth={5}
-      {...springProps}
+      {...props}
     />
   )
 }
