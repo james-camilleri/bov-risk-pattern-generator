@@ -10,8 +10,10 @@
   padding: 2rem;
 }
 
-main {
-  flex: 1
+svg {
+  width: 100%;
+  flex: 1;
+  margin: 0 3rem;
 }
 
 footer {
