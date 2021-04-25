@@ -10,10 +10,9 @@
   padding: 2rem;
 }
 
-svg {
-  max-width: 100%;
+.App > svg {
+  max-width: 80%;
   flex: 1;
-  margin: 0 3rem;
 }
 
 footer {

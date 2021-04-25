@@ -11,10 +11,10 @@ function App () {
   const onGenerate = () => { setSeed(Math.random()) }
 
   const [configuration, setConfiguration] = useState({
-    columns: 50,
+    columns: 40,
     maxCircles: 10,
     minCircles: 3,
-    rows: 5,
+    rows: 3,
     useSecondaryColours: true
   })
 
