@@ -77,7 +77,6 @@ function generateCircleAttributes (params) {
 
   let colours = PRIMARY_COLOURS
     .concat(useSecondaryColours ? SECONDARY_COLOURS : [])
-  shuffleArray(colours)
 
   if (colours.length < maxCircles) {
     const repeat = Math.ceil(maxCircles / colours.length)
@@ -85,12 +84,12 @@ function generateCircleAttributes (params) {
   }
 
   return circleCounts.map(count => {
+    shuffleArray(colours)
+
     const circleAttributes = Array(count).fill().map((_, i) => {
       const cx = (startColumn * COLUMN_WIDTH) + (i * COLUMN_WIDTH) + COLUMN_MID
       const cy = randomBetween(0 + MAX_RADIUS, ROW_HEIGHT - MAX_RADIUS)
       const r = randomBetween(MIN_RADIUS, MAX_RADIUS)
-
-      // TODO: Add colours.
       const fill = colours[i]
 
       return { cx, cy, r, fill }
