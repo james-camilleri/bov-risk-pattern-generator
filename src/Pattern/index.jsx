@@ -108,6 +108,7 @@ export const Pattern = (props) => {
     maxCircles,
     minCircles,
     rows,
+    svgRef,
     useSecondaryColours
   } = props
 
@@ -125,6 +126,7 @@ export const Pattern = (props) => {
 
   return (
     <svg
+      ref={svgRef}
       viewBox={`0 0 ${width} ${height}`}
       xmlns='http://www.w3.org/2000/svg'
     >

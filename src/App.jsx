@@ -1,14 +1,17 @@
 import './App.css'
 
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 
 import { Pattern } from './Pattern'
+import { SvgSave } from './SvgSave'
 
 function App () {
   // I think setting the state causes the component to
   // re-render, even though it's not being used anywhere.
   const [, setSeed] = useState(0)
   const onGenerate = () => { setSeed(Math.random()) }
+
+  const svgRef = useRef()
 
   const [configuration, setConfiguration] = useState({
     columns: 40,
@@ -18,20 +21,22 @@ function App () {
     useSecondaryColours: true
   })
 
-  const onSave = () => {}
-
   return (
     <div className='App'>
       <header className='App-header'>
         <h1>BOV Risk Management: Pattern Generator</h1>
       </header>
 
-      <Pattern {...configuration} key={JSON.stringify(configuration)} />
+      <Pattern
+        {...configuration}
+        key={JSON.stringify(configuration)}
+        svgRef={svgRef}
+      />
 
       <footer>
         <div className='controls'>
           <div className='control'>
-            <label itemID='rows'>Rows</label>
+            <label htmlFor='rows'>Rows</label>
             <input
               id='rows'
               max={30}
@@ -44,7 +49,7 @@ function App () {
             />
           </div>
           <div className='control'>
-            <label itemID='columns'>Columns</label>
+            <label htmlFor='columns'>Columns</label>
             <input
               id='columns'
               max={100}
@@ -57,7 +62,7 @@ function App () {
             />
           </div>
           <div className='control'>
-            <label itemID='minCircles'>Minimum # of circles</label>
+            <label htmlFor='minCircles'>Minimum # of circles</label>
             <input
               id='minCircles'
               max={20}
@@ -73,7 +78,7 @@ function App () {
             />
           </div>
           <div className='control'>
-            <label itemID='maxCircles'>Maximum # of circles</label>
+            <label htmlFor='maxCircles'>Maximum # of circles</label>
             <input
               id='maxCircles'
               max={30}
@@ -88,7 +93,7 @@ function App () {
             />
           </div>
           <div className='control'>
-            <label itemID='useSecondaryColours'>Use secondary colours</label>
+            <label htmlFor='useSecondaryColours'>Use secondary colours</label>
             <input
               id='useSecondaryColours'
               type='checkbox'
@@ -101,7 +106,7 @@ function App () {
         </div>
         <div className='button-container'>
           <button onClick={onGenerate}>Generate</button>
-          <button onClick={onSave}>Save</button>
+          <SvgSave svgRef={svgRef}>Save</SvgSave>
         </div>
       </footer>
     </div>
