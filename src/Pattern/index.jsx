@@ -16,7 +16,25 @@ const MIN_RADIUS = MIN_DIAMETER / 2
 const MAX_DIAMETER = COLUMN_WIDTH * 0.8
 const MAX_RADIUS = MAX_DIAMETER / 2
 
-function generateRow ({ columns, maxCircles, minCircles }) {
+const PRIMARY_COLOURS = [
+  '#840B55', // BOV purple
+  '#F7B32B', // amber
+  '#197278', // teal
+  '#FD6F5C', // salmon
+  '#1DE4A6' // mint
+]
+
+const SECONDARY_COLOURS = [
+  '#AD5C8D', // mauve
+  '#274156', // navy blue
+  '#1299B3', // cyan
+  '#FFE0B5', // pale flesh
+  '#C91B18' // red
+]
+
+function generateRow (params) {
+  const { columns, useSecondaryColours, maxCircles, minCircles } = params
+
   let freeColumns = columns + 1 // +1 column for last graph spacing.
 
   const circleCounts = []
@@ -45,11 +63,26 @@ function generateRow ({ columns, maxCircles, minCircles }) {
     shuffleArray(circleCounts)
   }
 
-  return generateCircleAttributes(circleCounts, maxCircles)
+  return generateCircleAttributes({
+    circleCounts,
+    maxCircles,
+    useSecondaryColours
+  })
 }
 
-function generateCircleAttributes (circleCounts, maxCircles) {
+function generateCircleAttributes (params) {
+  const { circleCounts, maxCircles, useSecondaryColours } = params
+
   let startColumn = 0
+
+  let colours = PRIMARY_COLOURS
+    .concat(useSecondaryColours ? SECONDARY_COLOURS : [])
+  shuffleArray(colours)
+
+  if (colours.length < maxCircles) {
+    const repeat = Math.ceil(maxCircles / colours.length)
+    colours = Array(repeat).fill(colours).flat()
+  }
 
   return circleCounts.map(count => {
     const circleAttributes = Array(count).fill().map((_, i) => {
@@ -58,7 +91,7 @@ function generateCircleAttributes (circleCounts, maxCircles) {
       const r = randomBetween(MIN_RADIUS, MAX_RADIUS)
 
       // TODO: Add colours.
-      const fill = 'black'
+      const fill = colours[i]
 
       return { cx, cy, r, fill }
     })
@@ -75,12 +108,18 @@ export const Pattern = (props) => {
     columns,
     maxCircles,
     minCircles,
-    rows
+    rows,
+    useSecondaryColours
   } = props
 
   const patternRows = Array(rows)
     .fill()
-    .map(() => generateRow({ columns, maxCircles, minCircles }))
+    .map(() => generateRow({
+      columns,
+      useSecondaryColours,
+      maxCircles,
+      minCircles
+    }))
 
   const width = columns * COLUMN_WIDTH
   const height = rows * (ROW_HEIGHT + COLUMN_WIDTH) - COLUMN_WIDTH

@@ -14,7 +14,8 @@ function App () {
     columns: 50,
     maxCircles: 10,
     minCircles: 3,
-    rows: 5
+    rows: 5,
+    useSecondaryColours: true
   })
 
   const onSave = () => {}
@@ -25,7 +26,7 @@ function App () {
         <h1>BOV Risk Management: Pattern Generator</h1>
       </header>
 
-      <Pattern {...configuration} />
+      <Pattern {...configuration} key={JSON.stringify(configuration)} />
 
       <footer>
         <div className='controls'>
@@ -65,11 +66,22 @@ function App () {
           <div className='control'>
             <label itemID='maxCircles'>Maximum # of circles</label>
             <input
-              id='X'
+              id='maxCircles'
               type='number'
               value={configuration.maxCircles}
               onChange={e => setConfiguration(
                 { ...configuration, maxCircles: e.target.value }
+              )}
+            />
+          </div>
+          <div className='control'>
+            <label itemID='useSecondaryColours'>Use secondary colours</label>
+            <input
+              id='useSecondaryColours'
+              type='checkbox'
+              checked={configuration.useSecondaryColours}
+              onChange={e => setConfiguration(
+                { ...configuration, useSecondaryColours: e.target.checked }
               )}
             />
           </div>
