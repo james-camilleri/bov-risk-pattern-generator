@@ -34,6 +34,8 @@ function App () {
             <label itemID='rows'>Rows</label>
             <input
               id='rows'
+              max={30}
+              min={1}
               type='number'
               value={configuration.rows}
               onChange={e => setConfiguration(
@@ -45,6 +47,8 @@ function App () {
             <label itemID='columns'>Columns</label>
             <input
               id='columns'
+              max={100}
+              min={3}
               type='number'
               value={configuration.columns}
               onChange={e => setConfiguration(
@@ -56,10 +60,15 @@ function App () {
             <label itemID='minCircles'>Minimum # of circles</label>
             <input
               id='minCircles'
+              max={20}
+              min={3}
               type='number'
               value={configuration.minCircles}
-              onChange={e => setConfiguration(
-                { ...configuration, minCircles: e.target.value }
+              onChange={e => setConfiguration({
+                ...configuration,
+                minCircles: e.target.value,
+                maxCircles: Math.max(e.target.value, configuration.maxCircles)
+              }
               )}
             />
           </div>
@@ -67,8 +76,12 @@ function App () {
             <label itemID='maxCircles'>Maximum # of circles</label>
             <input
               id='maxCircles'
+              max={30}
+              min={configuration.minCircles}
               type='number'
-              value={configuration.maxCircles}
+              value={configuration.maxCircles < configuration.minCircles
+                ? configuration.minCircles
+                : configuration.maxCircles}
               onChange={e => setConfiguration(
                 { ...configuration, maxCircles: e.target.value }
               )}
