@@ -11,7 +11,7 @@
 }
 
 svg {
-  width: 100%;
+  max-width: 100%;
   flex: 1;
   margin: 0 3rem;
 }
@@ -19,6 +19,27 @@ svg {
 footer {
   display: flex;
   align-items: center;
+}
+
+.controls {
+  display: flex;
+  margin-right: 2rem;
+}
+
+.control {
+  margin: 0 0.5rem;
+}
+
+.control label { margin: 0 0.5rem; }
+.control input {
+  padding: 0.5rem;
+  border-radius: 3px;
+  border: transparent solid 2px;
+  background: rgb(222, 222, 222);
+}
+.control input:focus {
+  border: #840b55 solid 2px;
+  outline: none;
 }
 
 button {

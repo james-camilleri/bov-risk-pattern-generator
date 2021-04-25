@@ -45,10 +45,10 @@ function generateRow ({ columns, maxCircles, minCircles }) {
     shuffleArray(circleCounts)
   }
 
-  return generateCircleAttributes(circleCounts)
+  return generateCircleAttributes(circleCounts, maxCircles)
 }
 
-function generateCircleAttributes (circleCounts) {
+function generateCircleAttributes (circleCounts, maxCircles) {
   let startColumn = 0
 
   return circleCounts.map(count => {
@@ -66,7 +66,7 @@ function generateCircleAttributes (circleCounts) {
     startColumn += count + 1
 
     // Pad to a fixed size for smooth animation.
-    return padArray(circleAttributes, 15)
+    return padArray(circleAttributes, maxCircles)
   })
 }
 
