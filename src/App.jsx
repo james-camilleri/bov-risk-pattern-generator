@@ -44,7 +44,7 @@ function App () {
               type='number'
               value={configuration.rows}
               onChange={e => setConfiguration(
-                { ...configuration, rows: e.target.value }
+                { ...configuration, rows: parseInt(e.target.value) }
               )}
             />
           </div>
@@ -57,7 +57,7 @@ function App () {
               type='number'
               value={configuration.columns}
               onChange={e => setConfiguration(
-                { ...configuration, columns: e.target.value }
+                { ...configuration, columns: parseInt(e.target.value) }
               )}
             />
           </div>
@@ -71,8 +71,11 @@ function App () {
               value={configuration.minCircles}
               onChange={e => setConfiguration({
                 ...configuration,
-                minCircles: e.target.value,
-                maxCircles: Math.max(e.target.value, configuration.maxCircles)
+                minCircles: parseInt(e.target.value),
+                maxCircles: Math.max(
+                  parseInt(e.target.value),
+                  configuration.maxCircles
+                )
               }
               )}
             />
@@ -88,7 +91,7 @@ function App () {
                 ? configuration.minCircles
                 : configuration.maxCircles}
               onChange={e => setConfiguration(
-                { ...configuration, maxCircles: e.target.value }
+                { ...configuration, maxCircles: parseInt(e.target.value) }
               )}
             />
           </div>
